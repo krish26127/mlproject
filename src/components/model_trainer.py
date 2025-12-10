@@ -115,7 +115,6 @@ class ModelTrainer:
                 params=params
             )
 
-            # FIX THIS ALSO — incorrect method name
             best_model_score = max(model_report.values())
 
             best_model_name = list(model_report.keys())[
@@ -136,7 +135,10 @@ class ModelTrainer:
 
             predicted = best_model.predict(x_test)
             r2_square = r2_score(y_test, predicted)
-            return r2_square
+            print(f"R² score of the best model ({best_model_name}): {r2_square}")
+            logging.info(f"R² score of the best model ({best_model_name}): {r2_square}")
+
+            return best_model
 
         except Exception as e:
             raise CustomException(e, sys)
